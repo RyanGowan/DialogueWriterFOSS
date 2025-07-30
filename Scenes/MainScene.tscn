@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cb6x21y04q6ad"]
+[gd_scene load_steps=2 format=3 uid="uid://cb6x21y04q6ad"]
+
+[ext_resource type="Script" path="res://Scripts/InputToJSON.gd" id="1_u3i34"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -7,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_u3i34")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -55,6 +58,17 @@ layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "EX: John Jacob Jingleheimer Smith"
 
+[node name="ExpressionInstruction" type="Label" parent="Background/InputScroll/InputContainer"]
+layout_mode = 2
+text = "Character Expression ID Goes Here:"
+vertical_alignment = 1
+
+[node name="ExpressionID" type="TextEdit" parent="Background/InputScroll/InputContainer"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "EX: Angry"
+
 [node name="DialogueLabel" type="Label" parent="Background/InputScroll/InputContainer"]
 layout_mode = 2
 text = "Dialogue Goes Here:"
@@ -69,13 +83,13 @@ placeholder_text = "EX: His name is my name too!"
 layout_mode = 2
 text = "ID This Entry Will Proceed To:"
 
-[node name="Name Input2" type="TextEdit" parent="Background/InputScroll/InputContainer"]
+[node name="ProceedTo" type="TextEdit" parent="Background/InputScroll/InputContainer"]
 custom_minimum_size = Vector2(0, 45)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "EX: GreetingFollowUp"
 
-[node name="Button" type="Button" parent="Background/InputScroll/InputContainer"]
+[node name="AddDialogueOption" type="Button" parent="Background/InputScroll/InputContainer"]
 layout_mode = 2
 text = "Add Dialogue Option"
 
@@ -120,6 +134,6 @@ layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "JSON will appear here as you add entries!"
 
-[node name="Button" type="Button" parent="Background/Output"]
+[node name="Save" type="Button" parent="Background/Output"]
 layout_mode = 2
 text = "Save to JSON File"
