@@ -137,3 +137,28 @@ placeholder_text = "JSON will appear here as you add entries!"
 [node name="Save" type="Button" parent="Background/Output"]
 layout_mode = 2
 text = "Save to JSON File"
+
+[node name="Load" type="Button" parent="Background/Output"]
+layout_mode = 2
+text = "Load A Dialogue"
+
+[node name="SaveFileDialog" type="FileDialog" parent="Background"]
+position = Vector2i(300, 100)
+size = Vector2i(500, 500)
+ok_button_text = "Save"
+access = 2
+filters = PackedStringArray("*.txt", "*.json")
+
+[node name="LoadFileDialog" type="FileDialog" parent="Background"]
+title = "Open a File"
+position = Vector2i(300, 100)
+size = Vector2i(500, 500)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.txt", "*.json")
+
+[connection signal="confirmed" from="Background/SaveFileDialog" to="." method="_on_save_file_dialog_confirmed"]
+[connection signal="file_selected" from="Background/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
+[connection signal="confirmed" from="Background/LoadFileDialog" to="." method="_on_load_file_dialog_confirmed"]
+[connection signal="file_selected" from="Background/LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
