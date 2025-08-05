@@ -19,9 +19,10 @@ extends Control
 
 var fileDialogPath: String = "";
 
-var currentContent: String = "";
-var currentEntries: Array = [];
+var currentEntries: Dictionary = {};
 var currentCharacters: Array = [];
+
+#var test: Dictionary = {"1": {"aa": "bb"}};
 
 func _ready():
 	acceptBtn.button_down.connect(AddToFile);
@@ -34,57 +35,83 @@ func _ready():
 #returns a string representing which characters are present in the current dialogue file
 func UpdatePresentCharacters() -> String:
 	var returnVal = "";
-	var startLine = str("\"", "PresentCharacters", "\"", ":[");
+	var startLine = str("\"", "PresentCharacters", "\"", ":[\n");
 	returnVal = startLine;
 	for x in len(currentCharacters):
 		var character = str("\t\"", currentCharacters[x], "\"");
 		if x < len(currentCharacters) - 1:
 			#only add a comma and a new line if there is another character coming
 			character = str(character, ",\n");
-		
 		returnVal = str(returnVal, character);
 		pass;
 	returnVal = str(returnVal, "\n\t],",);
 	return returnVal;
 
+#retrieves what state the output field
+func GetCurrentOutputFieldState() -> void:
+	
+	var stringToParse = outputField.text
+	var data = JSON.parse_string(stringToParse);
+	if data == null:
+		return;
+	var dialogueScript = data["Script"];
+	var characters = data["PresentCharacters"];
+	
+	for x in dialogueScript.keys():
+		#print(currentEntries[x]);
+		currentEntries[x] = dialogueScript[x];
+		if not(currentEntries[x]["character"] in currentCharacters):
+			currentCharacters.append(currentEntries[x]["character"]);
+			pass;
+		pass;
+	pass;
+
 #adds the current contents of the input fields to the JSON file
 func AddToFile() -> void:
-	var entry: String = GenerateEntry();
-	currentEntries.append(entry);
+	#if this current name is not already in our charater list, add it
+	if not(nameField.text in currentCharacters):
+		currentCharacters.append(nameField.text);
+		pass;
+	
+	#generate a dictionary entry
+	var pair: Dictionary = GenerateEntry();
+	
+	currentEntries.merge(pair);
 	var openingLine = "{"
 	var presentCharacters = UpdatePresentCharacters();
+	var entryKeys = currentEntries.keys();
 	var mainEntries = "\"Script\":{\n";
-	for x in len(currentEntries):
-		mainEntries = str(mainEntries, "\t", currentEntries[x])
+	
+	for x in len(entryKeys):
+		var key = str("\"",entryKeys[x], "\"", ":");
+		mainEntries = str(mainEntries, "\t\t", key, JSON.stringify(currentEntries[entryKeys[x]]));
 		if x < len(currentEntries) - 1:
 			#only add a comma and a new line if there is another character coming
 			mainEntries = str(mainEntries, ",\n");
 		else:
 			mainEntries = str(mainEntries, "\n");
-		pass;
 	var endLine = "\t}\n}";
-	
+	#print(mainEntries);
 	var finalResult = str(openingLine, "\n\t", presentCharacters, "\n\t", mainEntries, endLine);
 	outputField.text = finalResult;
 	ClearInputFields();
 
 #generates a JSON entry from the data in the input fields
-func GenerateEntry() -> String:
+func GenerateEntry() -> Dictionary:
 	
+	var finalDict: Dictionary = {};
+	var subDictionary: Dictionary = {};
 	var finalString = "";
-	var idLine = str("\t\"", idField.text, "\"", ":{");
-	var dialogueLine = str("\t\t\"", "speech" , "\"", ":", "\"", dialogueField.text, "\"", ",");
-	var expressionLine = str("\t\t\"", "expression" , "\"", ":", "\"", expressionField.text, "\"", ",");
-	var nameLine = str("\t\t\"", "character" , "\"", ":", "\"", nameField.text, "\"", ",");
-	var proceedingLine = str("\t\t\"", "proceedsTo" , "\"", ":", "\"", proceedField.text, "\"",);
-	var endingLine = str("\t\t}");
 	
-	finalString = str(idLine, "\n", dialogueLine, "\n", expressionLine, "\n", nameLine, "\n");
-	if proceedField.text != "":
-		finalString = str(finalString, proceedingLine, "\n");
-	finalString = str(finalString, endingLine);
 	
-	return finalString;
+	var idLine = str(idField.text);
+	subDictionary["speech"] = dialogueField.text;
+	subDictionary["expression"] = expressionField.text;
+	subDictionary["character"] = nameField.text;
+	subDictionary["proceedsTo"] = nameField.text;
+	
+	finalDict[idLine] = subDictionary
+	return finalDict;
 	
 #endregion
 
@@ -116,6 +143,7 @@ func _on_load_file_dialog_confirmed():
 	var file = FileAccess.open(fileDialogPath, FileAccess.READ);
 	outputField.text = file.get_as_text();
 	file.close();
+	GetCurrentOutputFieldState();
 	pass
 #endregion
 
