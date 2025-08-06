@@ -29,6 +29,14 @@ func _ready():
 	clearBtn.button_down.connect(ClearInputFields);
 	saveBtn.button_down.connect(SaveCurrentJSON);
 	loadBtn.button_down.connect(LoadDialogueFile);
+	
+	DoSettingsAdjustments();
+	pass;
+	
+func DoSettingsAdjustments() -> void:
+	nameField.visible = Settings.namesEnabled;
+	outputField.visible = Settings.codeEditorEnabled;
+	dialogueOptionBtn.visible = Settings.dialogueOptionsEnabled;
 	pass;
 
 #region Add Entry Functions
