@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb6x21y04q6ad"]
+[gd_scene load_steps=3 format=3 uid="uid://cb6x21y04q6ad"]
 
-[ext_resource type="Script" path="res://Scripts/InputToJSON.gd" id="1_u3i34"]
+[ext_resource type="Script" path="res://Scripts/InputToJSON.gd" id="1_6677j"]
+[ext_resource type="PackedScene" uid="uid://b7bqic52om3ph" path="res://Scenes/BackButton.tscn" id="2_p6jn3"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_u3i34")
+script = ExtResource("1_6677j")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -20,15 +21,27 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.399494, 0.409995, 0.554444, 1)
 
+[node name="Back" parent="Background" instance=ExtResource("2_p6jn3")]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.104
+anchor_bottom = 0.049
+offset_left = 3.0
+offset_top = 1.0
+offset_right = 0.192001
+offset_bottom = 0.247999
+
 [node name="InputScroll" type="ScrollContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.049
+anchor_left = 0.002
+anchor_top = 0.086
 anchor_right = 0.49
-anchor_bottom = 0.986
-offset_left = -0.448002
+anchor_bottom = 0.988
+offset_left = -0.304
+offset_top = 0.271999
 offset_right = 4.52002
-offset_bottom = 1.07196
+offset_bottom = -0.223999
 horizontal_scroll_mode = 0
 
 [node name="InputContainer" type="VBoxContainer" parent="Background/InputScroll"]

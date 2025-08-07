@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://x3dl6srtnvao"]
+
+[ext_resource type="Script" path="res://Scripts/ToggleSetting.gd" id="1_e3rp2"]
+
+[node name="ToggleSetting" type="ColorRect"]
+anchors_preset = -1
+anchor_right = 0.183
+anchor_bottom = 0.063
+offset_right = 0.18399
+offset_bottom = 0.175999
+color = Color(0.4, 0.411765, 0.552941, 1)
+script = ExtResource("1_e3rp2")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.393
+anchor_bottom = 0.976
+offset_right = 3.077
+offset_bottom = -0.0160027
+text = "Default:"
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.882
+anchor_right = 0.995
+anchor_bottom = 1.024
+offset_left = -0.102005
+offset_right = 0.0549927
+offset_bottom = 0.0159988

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7bqic52om3ph"]
+
+[ext_resource type="Script" path="res://Scripts/BackButton.gd" id="1_pogdn"]
+
+[node name="Back" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Back To Menu"
+script = ExtResource("1_pogdn")
