@@ -48,38 +48,66 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 15
+theme_override_constants/separation = 5
 
-[node name="IDLabel" type="Label" parent="Background/InputScroll/InputContainer"]
+[node name="ID&Proceeds" type="HBoxContainer" parent="Background/InputScroll/InputContainer"]
+layout_mode = 2
+
+[node name="ID" type="VBoxContainer" parent="Background/InputScroll/InputContainer/ID&Proceeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IDLabel" type="Label" parent="Background/InputScroll/InputContainer/ID&Proceeds/ID"]
 layout_mode = 2
 text = "This Entry's ID:"
 
-[node name="IDInput" type="TextEdit" parent="Background/InputScroll/InputContainer"]
-custom_minimum_size = Vector2(0, 45)
+[node name="IDInput" type="TextEdit" parent="Background/InputScroll/InputContainer/ID&Proceeds/ID"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-size_flags_vertical = 3
 placeholder_text = "EX: InitialGreeting"
 
-[node name="Name Instruction" type="Label" parent="Background/InputScroll/InputContainer"]
+[node name="ProceedID" type="VBoxContainer" parent="Background/InputScroll/InputContainer/ID&Proceeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProceedsToInstruction" type="Label" parent="Background/InputScroll/InputContainer/ID&Proceeds/ProceedID"]
+layout_mode = 2
+text = "ID This Entry Will Proceed To:"
+
+[node name="ProceedTo" type="TextEdit" parent="Background/InputScroll/InputContainer/ID&Proceeds/ProceedID"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "EX: GreetingFollowUp"
+
+[node name="Name&Expression" type="HBoxContainer" parent="Background/InputScroll/InputContainer"]
+layout_mode = 2
+
+[node name="Name" type="VBoxContainer" parent="Background/InputScroll/InputContainer/Name&Expression"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name Instruction" type="Label" parent="Background/InputScroll/InputContainer/Name&Expression/Name"]
 layout_mode = 2
 text = "Character Name Goes Here:"
 vertical_alignment = 1
 
-[node name="Name Input" type="TextEdit" parent="Background/InputScroll/InputContainer"]
-custom_minimum_size = Vector2(0, 45)
+[node name="Name Input" type="TextEdit" parent="Background/InputScroll/InputContainer/Name&Expression/Name"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-size_flags_vertical = 3
 placeholder_text = "EX: John Jacob Jingleheimer Smith"
 
-[node name="ExpressionInstruction" type="Label" parent="Background/InputScroll/InputContainer"]
+[node name="Expression" type="VBoxContainer" parent="Background/InputScroll/InputContainer/Name&Expression"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExpressionInstruction" type="Label" parent="Background/InputScroll/InputContainer/Name&Expression/Expression"]
 layout_mode = 2
 text = "Character Expression ID Goes Here:"
 vertical_alignment = 1
 
-[node name="ExpressionID" type="TextEdit" parent="Background/InputScroll/InputContainer"]
-custom_minimum_size = Vector2(0, 45)
+[node name="ExpressionID" type="TextEdit" parent="Background/InputScroll/InputContainer/Name&Expression/Expression"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-size_flags_vertical = 3
 placeholder_text = "EX: Angry"
 
 [node name="DialogueLabel" type="Label" parent="Background/InputScroll/InputContainer"]
@@ -89,34 +117,49 @@ text = "Dialogue Goes Here:"
 [node name="DialogueEntry" type="TextEdit" parent="Background/InputScroll/InputContainer"]
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 2
-size_flags_vertical = 3
 placeholder_text = "EX: His name is my name too!"
 
-[node name="ProceedsToInstruction" type="Label" parent="Background/InputScroll/InputContainer"]
+[node name="AlignmentUI" type="VBoxContainer" parent="Background/InputScroll/InputContainer"]
 layout_mode = 2
-text = "ID This Entry Will Proceed To:"
 
-[node name="ProceedTo" type="TextEdit" parent="Background/InputScroll/InputContainer"]
-custom_minimum_size = Vector2(0, 45)
+[node name="Alignment" type="Label" parent="Background/InputScroll/InputContainer/AlignmentUI"]
 layout_mode = 2
-size_flags_vertical = 3
-placeholder_text = "EX: GreetingFollowUp"
+text = "Alignment ID:"
 
-[node name="AddDialogueOption" type="Button" parent="Background/InputScroll/InputContainer"]
+[node name="AlignmentEntry" type="TextEdit" parent="Background/InputScroll/InputContainer/AlignmentUI"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+placeholder_text = "EX: Left"
+
+[node name="SpacingContainer" type="HBoxContainer" parent="Background/InputScroll/InputContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="DialogueOptions" type="VBoxContainer" parent="Background/InputScroll/InputContainer"]
+layout_mode = 2
+
+[node name="List" type="VBoxContainer" parent="Background/InputScroll/InputContainer/DialogueOptions"]
+layout_mode = 2
+
+[node name="AddDialogueOption" type="Button" parent="Background/InputScroll/InputContainer/DialogueOptions"]
 layout_mode = 2
 text = "Add Dialogue Option"
+
+[node name="SpacingContainer2" type="HBoxContainer" parent="Background/InputScroll/InputContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
 
 [node name="Confirm" type="Node" parent="Background"]
 
 [node name="Buttons" type="VBoxContainer" parent="Background/Confirm"]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.059
+anchor_top = 0.131
 anchor_right = 0.59
-anchor_bottom = 0.16
-offset_top = -0.232002
+anchor_bottom = 0.233
+offset_top = 0.111992
 offset_right = 0.319946
-offset_bottom = 0.319992
+offset_bottom = 0.0159912
 
 [node name="Add" type="Button" parent="Background/Confirm/Buttons"]
 layout_mode = 2

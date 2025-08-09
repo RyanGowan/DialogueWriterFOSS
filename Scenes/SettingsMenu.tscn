@@ -66,8 +66,26 @@ layout_mode = 2
 settingName = "Alignment:"
 settingVariableName = "alignmentEnabled"
 
-[node name="DialogueOptions4" parent="Background/ScrollContainer/VBoxContainer" instance=ExtResource("2_oxl1t")]
+[node name="CodeEditorOptions4" parent="Background/ScrollContainer/VBoxContainer" instance=ExtResource("2_oxl1t")]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 settingName = "Code Editor:"
 settingVariableName = "codeEditorEnabled"
+
+[node name="ExpressionOptions" parent="Background/ScrollContainer/VBoxContainer" instance=ExtResource("2_oxl1t")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+settingName = "Expressions:"
+settingVariableName = "expressionEnabled"
+
+[node name="IdOptions" parent="Background/ScrollContainer/VBoxContainer" instance=ExtResource("2_oxl1t")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+settingName = "ID Field:"
+settingVariableName = "idEnabled"
+
+[node name="ProceedOptions" parent="Background/ScrollContainer/VBoxContainer" instance=ExtResource("2_oxl1t")]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+settingName = "Proceeding Entry Field:"
+settingVariableName = "proceedEnabled"

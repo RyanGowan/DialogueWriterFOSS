@@ -1,21 +1,38 @@
 extends Control
 
+#region Buttons
 @onready var acceptBtn = $Background/Confirm/Buttons/Add;
 @onready var clearBtn = $Background/Confirm/Buttons/Delete;
 @onready var saveBtn = $Background/Output/Save;
 @onready var loadBtn = $Background/Output/Load;
-@onready var dialogueOptionBtn = $Background/InputScroll/InputContainer/AddDialogueOption;
+@onready var dialogueOptionBtn = $Background/InputScroll/InputContainer/DialogueOptions/AddDialogueOption;
+#endregion
 
-@onready var idField = $Background/InputScroll/InputContainer/IDInput;
-@onready var nameField = $"Background/InputScroll/InputContainer/Name Input";
-@onready var expressionField = $Background/InputScroll/InputContainer/ExpressionID;
+#region input fields
+@onready var idField = $"Background/InputScroll/InputContainer/ID&Proceeds/ID/IDInput";
+@onready var nameField = $"Background/InputScroll/InputContainer/Name&Expression/Name/Name Input";
+@onready var expressionField = $"Background/InputScroll/InputContainer/Name&Expression/Expression/ExpressionID";
 @onready var dialogueField = $Background/InputScroll/InputContainer/DialogueEntry;
-@onready var proceedField =  $Background/InputScroll/InputContainer/ProceedTo;
+@onready var proceedField =  $"Background/InputScroll/InputContainer/ID&Proceeds/ProceedID/ProceedTo";
+@onready var alignmentField = $Background/InputScroll/InputContainer/AlignmentUI/AlignmentEntry;
+#endregion
 
+@onready var optionList = $Background/InputScroll/InputContainer/DialogueOptions/List;
+
+#region UI Groupings
+@onready var dialogueOptionUI = $Background/InputScroll/InputContainer/DialogueOptions;
+@onready var nameUI = $"Background/InputScroll/InputContainer/Name&Expression/Name";
+@onready var expressionUI = $"Background/InputScroll/InputContainer/Name&Expression/Expression";
+@onready var idUI = $"Background/InputScroll/InputContainer/ID&Proceeds/ID";
+@onready var proceedUI = $"Background/InputScroll/InputContainer/ID&Proceeds/ProceedID";
+@onready var alignmentUI = $Background/InputScroll/InputContainer/AlignmentUI;
+#endregion
+
+#region Output
 @onready var outputField = $Background/Output/CodeEdit;
-
 @onready var saveFileDialog = $Background/SaveFileDialog;
 @onready var loadFileDialog = $Background/LoadFileDialog;
+#endregion
 
 var fileDialogPath: String = "";
 
@@ -34,9 +51,13 @@ func _ready():
 	pass;
 	
 func DoSettingsAdjustments() -> void:
-	nameField.visible = Settings.namesEnabled;
+	nameUI.visible = Settings.namesEnabled;
 	outputField.visible = Settings.codeEditorEnabled;
-	dialogueOptionBtn.visible = Settings.dialogueOptionsEnabled;
+	dialogueOptionUI.visible = Settings.dialogueOptionsEnabled;
+	expressionUI.visible = Settings.expressionEnabled;
+	idUI.visible = Settings.idEnabled;
+	proceedUI.visible = Settings.proceedEnabled;
+	alignmentUI.visible = Settings.alignmentEnabled;
 	pass;
 
 #region Add Entry Functions
@@ -113,10 +134,17 @@ func GenerateEntry() -> Dictionary:
 	
 	
 	var idLine = str(idField.text);
-	subDictionary["speech"] = dialogueField.text;
-	subDictionary["expression"] = expressionField.text;
-	subDictionary["character"] = nameField.text;
-	subDictionary["proceedsTo"] = nameField.text;
+	if dialogueField.text != "":
+		subDictionary["speech"] = dialogueField.text;
+	if expressionField.text != "":
+		subDictionary["expression"] = expressionField.text;
+	if nameField.text != "":
+		subDictionary["character"] = nameField.text;
+	if proceedField.text != "":
+		subDictionary["proceedsTo"] = proceedField.text;
+	if alignmentField.text != "":
+		subDictionary["alignment"] = alignmentField.text;
+	
 	
 	finalDict[idLine] = subDictionary
 	return finalDict;
