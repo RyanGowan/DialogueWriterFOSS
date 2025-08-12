@@ -6,6 +6,7 @@ extends Control
 @onready var saveBtn = $Background/Output/Save;
 @onready var loadBtn = $Background/Output/Load;
 @onready var dialogueOptionBtn = $Background/InputScroll/InputContainer/DialogueOptions/AddDialogueOption;
+@onready var newFileBtn = $Background/Output/New;
 #endregion
 
 #region input fields
@@ -18,6 +19,7 @@ extends Control
 #endregion
 
 @onready var optionList = $Background/InputScroll/InputContainer/DialogueOptions/List;
+var currentDialogueOptions = [];
 
 #region UI Groupings
 @onready var dialogueOptionUI = $Background/InputScroll/InputContainer/DialogueOptions;
@@ -46,7 +48,8 @@ func _ready():
 	clearBtn.button_down.connect(ClearInputFields);
 	saveBtn.button_down.connect(SaveCurrentJSON);
 	loadBtn.button_down.connect(LoadDialogueFile);
-	
+	newFileBtn.button_down.connect(StartNewFile);
+	dialogueOptionBtn.button_down.connect(AddDialogueOption);
 	DoSettingsAdjustments();
 	pass;
 	
@@ -145,6 +148,13 @@ func GenerateEntry() -> Dictionary:
 	if alignmentField.text != "":
 		subDictionary["alignment"] = alignmentField.text;
 	
+	#if there are dialogue option fields, add them here
+	var txtArray = [];
+	for x in len(currentDialogueOptions):
+		txtArray.append(currentDialogueOptions[x].text);
+	if txtArray.size() > 0:
+		subDictionary["dialogueOptions"] = txtArray;
+	
 	
 	finalDict[idLine] = subDictionary
 	return finalDict;
@@ -183,6 +193,27 @@ func _on_load_file_dialog_confirmed():
 	pass
 #endregion
 
+func AddDialogueOption() -> void:
+	var newOption = TextEdit.new();
+	newOption.custom_minimum_size = Vector2(0, 35);
+	newOption.placeholder_text = "Dialogue Option Goes Here"
+	optionList.add_child(newOption);
+	currentDialogueOptions.append(newOption);
+	pass;
+
+func ClearDialogueOptions() -> void:
+	for x in currentDialogueOptions:
+		x.queue_free();
+	
+	currentDialogueOptions.clear();
+	pass;
+
+func StartNewFile() -> void:
+	ClearInputFields();
+	currentEntries.clear();
+	outputField.text = "";
+	pass;
+
 #resets all input fields to empty strings
 func ClearInputFields() -> void:
 	dialogueField.text = "";
@@ -190,4 +221,5 @@ func ClearInputFields() -> void:
 	expressionField.text = "";
 	nameField.text = "";
 	proceedField.text = "";
+	ClearDialogueOptions();
 	pass;

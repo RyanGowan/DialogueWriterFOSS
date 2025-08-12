@@ -138,6 +138,10 @@ layout_mode = 2
 [node name="DialogueOptions" type="VBoxContainer" parent="Background/InputScroll/InputContainer"]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="Background/InputScroll/InputContainer/DialogueOptions"]
+layout_mode = 2
+text = "Dialogue Options"
+
 [node name="List" type="VBoxContainer" parent="Background/InputScroll/InputContainer/DialogueOptions"]
 layout_mode = 2
 
@@ -197,6 +201,10 @@ text = "Save to JSON File"
 [node name="Load" type="Button" parent="Background/Output"]
 layout_mode = 2
 text = "Load A Dialogue"
+
+[node name="New" type="Button" parent="Background/Output"]
+layout_mode = 2
+text = "New File"
 
 [node name="SaveFileDialog" type="FileDialog" parent="Background"]
 position = Vector2i(300, 100)
