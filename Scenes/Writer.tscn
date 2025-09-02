@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cb6x21y04q6ad"]
 
-[ext_resource type="Script" path="res://Scripts/InputToJSON.gd" id="1_6677j"]
+[ext_resource type="Script" uid="uid://63msdmkxs8to" path="res://Scripts/InputToJSON.gd" id="1_6677j"]
 [ext_resource type="PackedScene" uid="uid://b7bqic52om3ph" path="res://Scenes/BackButton.tscn" id="2_p6jn3"]
 
 [node name="Main" type="Control"]

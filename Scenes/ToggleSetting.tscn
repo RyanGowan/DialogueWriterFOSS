@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://x3dl6srtnvao"]
 
-[ext_resource type="Script" path="res://Scripts/ToggleSetting.gd" id="1_e3rp2"]
+[ext_resource type="Script" uid="uid://b22ryfi0krilg" path="res://Scripts/ToggleSetting.gd" id="1_e3rp2"]
 
 [node name="ToggleSetting" type="ColorRect"]
 anchors_preset = -1
